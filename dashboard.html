@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GrindLeague</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="mobile-wrapper">
+
+    <div class="app-card">
+
+        <!-- HEADER -->
+        <h1 class="welcome-text">
+            WELCOME {{ username }}
+        </h1>
+
+        <div class="level-info">
+            Level {{ level }} • {{ user_xp }} XP
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: {{ progress_percent }}%;"></div>
+        </div>
+
+        <!-- TEAM SECTION -->
+        <div class="card-section">
+            <h2>TEAM {{ team.upper() }}</h2>
+
+            <form method="POST" enctype="multipart/form-data">
+                <select name="action" required>
+                    <option value="workout">Workout (+15 XP)</option>
+                    <option value="study">Study (+10 XP)</option>
+                    <option value="business">Business Work (+20 XP)</option>
+                    <option value="money">Made Money (+25 XP)</option>
+                </select>
+
+                <input type="file" name="proof" required>
+
+                <button type="submit" class="primary-btn">
+                    Submit With Proof
+                </button>
+            </form>
+        </div>
+
+        <!-- TEAM LEADERBOARD -->
+        <div class="card-section">
+            <h2>🔥 Team Leaderboard</h2>
+            {% for user, xp in team_leaderboard %}
+                <div class="list-item">
+                    {{ user }} — {{ xp }} XP
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- TOP CONTRIBUTORS -->
+        <div class="card-section">
+            <h2>🏆 Top Contributors</h2>
+            {% for user, xp in top_contributors %}
+                <div class="list-item">
+                    {{ user }} — {{ xp }} XP
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- CHAT -->
+        <div class="card-section">
+            <h2>💬 Team Chat</h2>
+
+            <div class="chat-box">
+                {% for user, message in messages %}
+                    <div class="chat-message">
+                        <strong>{{ user }}:</strong> {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <form method="POST" action="/chat">
+                <input type="text" name="message" placeholder="Type a message..." required>
+                <button type="submit" class="primary-btn">
+                    Send
+                </button>
+            </form>
+        </div>
+
+        <a href="/logout" class="logout-link">LOG OUT</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

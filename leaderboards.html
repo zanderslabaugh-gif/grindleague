@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leaderboards</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="page-container">
+
+    <div class="navbar">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/chat">Chat</a>
+        <a href="/leaderboards" class="active">Leaderboards</a>
+        <a href="/logout">Log Out</a>
+    </div>
+
+    <div class="card">
+
+        <h2>🔥 Team Leaderboard</h2>
+
+        <div class="leaderboard">
+            {% for team, xp in teams %}
+            <div class="leaderboard-row">
+                <span>{{ team }}</span>
+                <span>{{ xp }} XP</span>
+            </div>
+            {% endfor %}
+        </div>
+
+        <hr>
+
+        <h2>🏆 Top Contributors</h2>
+
+        <div class="leaderboard">
+            {% for user, xp in contributors %}
+            <div class="leaderboard-row">
+                <span>{{ user }}</span>
+                <span>{{ xp }} XP</span>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

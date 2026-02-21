@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Team Chat</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="page-container">
+
+    <div class="navbar">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/chat" class="active">Chat</a>
+        <a href="/leaderboards">Leaderboards</a>
+        <a href="/logout">Log Out</a>
+    </div>
+
+    <div class="card">
+
+        <h2>💬 Team Chat</h2>
+
+        <form method="POST" class="chat-form">
+            <input type="text" name="message" placeholder="Type a message..." required>
+            <button type="submit" class="primary-btn">Send</button>
+        </form>
+
+        <div class="chat-box">
+
+            {% for msg_id, user, message, time in messages %}
+            <div class="chat-message">
+                
+                <div class="chat-header">
+                    <strong>{{ user }}</strong>
+                    <span class="chat-time">{{ time }}</span>
+                </div>
+
+                <p>{{ message }}</p>
+
+                {% if user == username %}
+                <a href="/chat?delete={{ msg_id }}" class="delete-link">Delete</a>
+                {% endif %}
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
