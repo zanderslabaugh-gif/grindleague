@@ -14,7 +14,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 # DATABASE SETUP
 # -----------------------
 def init_db():
-    conn = sqlite3.connect("grindleague.db")
+    conn = sqlite3.connect(os.path.join(os.getcwd(), "grindleague.db"))
     c = conn.cursor()
 
     c.execute("""
@@ -58,7 +58,7 @@ def home():
         session["username"] = username
         session["team"] = team
 
-        conn = sqlite3.connect("grindleague.db")
+        conn = sqlite3.connect(os.path.join(os.getcwd(), "grindleague.db"))
         c = conn.cursor()
 
         c.execute("SELECT * FROM users WHERE username = ?", (username,))
@@ -88,7 +88,7 @@ def dashboard():
     username = session["username"]
     team = session["team"]
 
-    conn = sqlite3.connect("grindleague.db")
+    conn = sqlite3.connect(os.path.join(os.getcwd(), "grindleague.db"))
     c = conn.cursor()
 
     # Handle XP submission with proof
@@ -176,7 +176,7 @@ def chat():
     username = session["username"]
     team = session["team"]
 
-    conn = sqlite3.connect("grindleague.db")
+    conn = sqlite3.connect(os.path.join(os.getcwd(), "grindleague.db"))
     c = conn.cursor()
 
     if request.method == "POST":
@@ -216,7 +216,7 @@ def leaderboards():
     if "username" not in session:
         return redirect("/")
 
-    conn = sqlite3.connect("grindleague.db")
+    conn = sqlite3.connect(os.path.join(os.getcwd(), "grindleague.db"))
     c = conn.cursor()
 
     c.execute("""
